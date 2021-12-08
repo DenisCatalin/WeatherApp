@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import env from "react-dotenv";
-import { CityName, DescriptionArea, DescriptionImage, FeelsLikeTemperature, MainDescription, MainTemperature, NameSearch, NotFound, SearchArea, SearchButton, SearchInput, SecondaryDescription, TemperatureArea, WeatherPage } from './landing.styles';
+import { CityName, DescriptionArea, DescriptionImage, FeelsLikeTemperature, MainDescription, MainTemperature, NameSearch, NotFound, SearchArea, SearchInput, SecondaryDescription, TemperatureArea, WeatherPage } from './landing.styles';
 import './global.css'
 
 const App = () => {
@@ -98,18 +98,20 @@ const App = () => {
         background: 'linear-gradient(180deg, rgba(25, 50, 89, 1), rgba(0, 0, 0, .8))'
     }
 
-    const [search, setSearch] = useState('');
+    const [search, setSearch] = useState('aa');
     const [data, setData] = useState();
 
-    const searchForWeather = async () => {
-        const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${search}&units=Metric&appid=${env.API_KEY}`);
-        const data = await res.json();
-        if(data.message === undefined) setData(data);
-        else setData(data.message);
-    }
+    useEffect(() => {
+        if(search.length !== 0) {
+            (async function fetchData() {
+                const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${search}&units=Metric&appid=${env.API_KEY}`);
+                const data = await res.json();
+                if(data.message === undefined) setData(data);
+                else setData(data.message);
+            })()
+        } else return;
+    }, [search]);
     
-    console.log(data);
-
     return (
         <WeatherPage style={hour < 17 ? backgroundNight : backgroundDay}>
             <SearchArea style={{marginBottom: data ? '0em' : '50em'}}>
@@ -117,16 +119,11 @@ const App = () => {
                     onChange={(e) => {
                         setSearch(e.target.value);
                     }} 
-                    
                     placeholder='Search...' 
-
-                    onKeyPress={event => {
-                    if(event.key === 'Enter') searchForWeather();
-                }}/>
-                <SearchButton onClick={searchForWeather}><i className="fas fa-search"></i></SearchButton>
+                />
             </SearchArea>
             {data === 'city not found' ? 
-                <><NotFound>{data}</NotFound></>
+                <><NotFound>{search.length > 2 ? data : null}</NotFound></>
                 :
                 <><TemperatureArea style={{opacity: data ? '1' : '0'}}>
                     <MainTemperature>{data ? data.main.temp.toFixed(0) : null}°C</MainTemperature>

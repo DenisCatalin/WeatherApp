@@ -24,58 +24,12 @@ export const SearchInput = styled.input`
     width: 70%;
     height: 80%;
     background: rgb(243, 243, 243);
-    border-radius: 50px 0 0 50px;
+    border-radius: 50px;
     background-color: white;
     padding: 1rem;
     border: none;
     outline: none;
     font-size: 1.3em;
-`;
-
-export const SearchButton = styled.button`
-    border: none;
-    width: 5%;
-    height: 80%;
-    font-size: 1.2em;
-    border-radius: 0 50px 50px 0;
-    cursor: pointer;
-    background: white;
-    border: none;
-    outline: none;
-    z-index: 15;
-
-    @media screen and (max-width: 420px) {
-        width: 15%;
-    }
-
-    @media screen and (max-height: 670px) {
-        height: 4.8vh;
-    }
-
-    @media screen and (max-height: 640px) {
-        height: 5vh;
-    }
-
-    @media screen and (max-height: 568px) {
-        height: 5.6vh;
-    }
-
-    @media screen and (max-height: 414px) {
-        height: 8vh;
-    }
-
-    @media screen and (max-height: 375px) {
-        height: 8.4vh;
-    }
-
-    @media screen and (max-height: 360px) {
-        height: 8.8vh;
-    }
-
-    @media screen and (max-height: 320px) {
-        height: 10vh;
-    }
-
 `;
 
 export const TemperatureArea = styled.div`
