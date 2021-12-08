@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import env from "react-dotenv";
-import { CityName, DescriptionArea, DescriptionImage, FeelsLikeTemperature, MainDescription, MainTemperature, NameSearch, SearchArea, SearchButton, SearchInput, SecondaryDescription, TemperatureArea, WeatherPage } from './landing.styles';
+import { CityName, DescriptionArea, DescriptionImage, FeelsLikeTemperature, MainDescription, MainTemperature, NameSearch, NotFound, SearchArea, SearchButton, SearchInput, SecondaryDescription, TemperatureArea, WeatherPage } from './landing.styles';
 import './global.css'
 
 const App = () => {
@@ -104,8 +104,11 @@ const App = () => {
     const searchForWeather = async () => {
         const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${search}&units=Metric&appid=${env.API_KEY}`);
         const data = await res.json();
-        setData(data);
+        if(data.message === undefined) setData(data);
+        else setData(data.message);
     }
+    
+    console.log(data);
 
     return (
         <WeatherPage style={hour < 17 ? backgroundNight : backgroundDay}>
@@ -122,19 +125,23 @@ const App = () => {
                 }}/>
                 <SearchButton onClick={searchForWeather}><i className="fas fa-search"></i></SearchButton>
             </SearchArea>
-            <TemperatureArea style={{opacity: data ? '1' : '0'}}>
-                <MainTemperature>{data ? data.main.temp.toFixed(0) : null}°C</MainTemperature>
-                <FeelsLikeTemperature>Feels like: {data ? data.main.feels_like.toFixed(0) : null}°C</FeelsLikeTemperature>
-            </TemperatureArea>
-            <DescriptionArea style={{opacity: data ? '1' : '0'}}>
-                <DescriptionImage src={data ? getPhoto(data.weather[0].icon) : null} alt={data ? data.weather[0].description : null}/>
-                <MainDescription>{data ? data.weather[0].main : null}</MainDescription>
-                <SecondaryDescription>{data ? data.weather[0].description : null}</SecondaryDescription>
-            </DescriptionArea>
-            <CityName style={{opacity: data ? '1' : '0'}}>
-                <NameSearch>{data ? data.name.toUpperCase() : null}</NameSearch>
-                <NameSearch>{data ? data.sys.country.toUpperCase() : null}</NameSearch>
-            </CityName>
+            {data === 'city not found' ? 
+                <><NotFound>{data}</NotFound></>
+                :
+                <><TemperatureArea style={{opacity: data ? '1' : '0'}}>
+                    <MainTemperature>{data ? data.main.temp.toFixed(0) : null}°C</MainTemperature>
+                    <FeelsLikeTemperature>Feels like: {data ? data.main.feels_like.toFixed(0) : null}°C</FeelsLikeTemperature>
+                </TemperatureArea>
+                <DescriptionArea style={{opacity: data ? '1' : '0'}}>
+                    <DescriptionImage src={data ? getPhoto(data.weather[0].icon) : null} alt={data ? data.weather[0].description : null}/>
+                    <MainDescription>{data ? data.weather[0].main : null}</MainDescription>
+                    <SecondaryDescription>{data ? data.weather[0].description : null}</SecondaryDescription>
+                </DescriptionArea>
+                <CityName style={{opacity: data ? '1' : '0'}}>
+                    <NameSearch>{data ? data.name.toUpperCase() : null}</NameSearch>
+                    <NameSearch>{data ? data.sys.country.toUpperCase() : null}</NameSearch>
+                </CityName></>
+            }
         </WeatherPage>
     )
 }

@@ -15,38 +15,67 @@ export const SearchArea = styled.div`
     display: flex;
     justify-content: center;
     align-content: center;
-    padding: 3rem 0;
+    padding: 2rem 0;
     position: relative;
     transition: 1s ease-in-out;
 `;
 
 export const SearchInput = styled.input`
     width: 70%;
-    height: 7%;
+    height: 80%;
     background: rgb(243, 243, 243);
-    border-radius: 50px;
-    padding: 1.5rem 1rem;
+    border-radius: 50px 0 0 50px;
+    background-color: white;
+    padding: 1rem;
     border: none;
     outline: none;
     font-size: 1.3em;
 `;
 
 export const SearchButton = styled.button`
-    position: absolute;
     border: none;
-    font-size: 1.3em;
-    top: 52%;
-    left: 84%;
-    transform: translate(-84%, -50%);
+    width: 5%;
+    height: 80%;
+    font-size: 1.2em;
+    border-radius: 0 50px 50px 0;
     cursor: pointer;
-    padding: 1rem;
-    background: transparent;
+    background: white;
     border: none;
     outline: none;
+    z-index: 15;
 
     @media screen and (max-width: 420px) {
-        top: 60%;
+        width: 15%;
     }
+
+    @media screen and (max-height: 670px) {
+        height: 4.8vh;
+    }
+
+    @media screen and (max-height: 640px) {
+        height: 5vh;
+    }
+
+    @media screen and (max-height: 568px) {
+        height: 5.6vh;
+    }
+
+    @media screen and (max-height: 414px) {
+        height: 8vh;
+    }
+
+    @media screen and (max-height: 375px) {
+        height: 8.4vh;
+    }
+
+    @media screen and (max-height: 360px) {
+        height: 8.8vh;
+    }
+
+    @media screen and (max-height: 320px) {
+        height: 10vh;
+    }
+
 `;
 
 export const TemperatureArea = styled.div`
@@ -66,6 +95,19 @@ export const MainTemperature = styled.h1`
     font-weight: bold;
     text-align: center;
     text-shadow: 5px 1px 0px rgba(0, 0, 0, .3);
+
+    @media screen and (max-width: 850px) {
+        font-size: 2.5em;
+    }
+    @media screen and (max-width: 420px) {
+        font-size: 3em;
+    }
+    @media screen and (max-width: 670px) {
+        font-size: 1.8em;
+    }
+    @media screen and (max-width: 360px) {
+        font-size: 2.8em;
+    }
 `;
 
 export const FeelsLikeTemperature = styled.h2`
@@ -75,8 +117,15 @@ export const FeelsLikeTemperature = styled.h2`
     font-weight: bold;
     text-align: center;
     text-shadow: 4px 0px 0px rgba(0, 0, 0, .3);
+
+    @media screen and (max-width: 850px) {
+        font-size: .8em;
+    }
     @media screen and (max-width: 420px) {
         font-size: 1.2em;
+    }
+    @media screen and (max-width: 360px) {
+        font-size: .8em;
     }
 `;
 
@@ -105,7 +154,13 @@ export const DescriptionImage = styled.img`
     @media screen and (max-width: 1050px) {
         width: 20%;
     }
+    @media screen and (max-width: 850px) {
+        width: 10%;
+    }
     @media screen and (max-width: 420px) {
+        width: 35%;
+    }
+    @media screen and (max-width: 360px) {
         width: 30%;
     }
 `;
@@ -118,8 +173,17 @@ export const MainDescription = styled.h1`
     margin-top: 3em;
     text-shadow: 4px 1px 0px rgba(0, 0, 0, .3);
 
+    @media screen and (max-width: 850px) {
+        font-size: 1.7em;
+    }
+    @media screen and (max-width: 570px) {
+        font-size: 1.4em;
+    }
     @media screen and (max-width: 420px) {
         font-size: 2.7em;
+    }
+    @media screen and (max-width: 360px) {
+        font-size: 1.8em;
     }
 `;
 
@@ -129,6 +193,18 @@ export const SecondaryDescription = styled.h2`
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
     text-shadow: 2px 1px 0px rgba(0, 0, 0, .3);
+    @media screen and (max-width: 850px) {
+        font-size: .7em;
+    }
+    @media screen and (max-width: 570px) {
+        font-size: .6em;
+    }
+    @media screen and (max-width: 420px) {
+        font-size: 1em;
+    }
+    @media screen and (max-width: 360px) {
+        font-size: .8em;
+    }
 `;
 
 export const CityName = styled.div`
@@ -148,7 +224,29 @@ export const NameSearch = styled.h1`
     font-family: 'Poppins', sans-serif;
     font-weight: bold;
     text-shadow: 4px 1px 0px rgba(0, 0, 0, .3);
+
+    @media screen and (max-width: 850px) {
+        font-size: 1.7em;
+    }
+    @media screen and (max-width: 570px) {
+        font-size: 1em;
+    }
+
     @media screen and (max-width: 420px) {
         font-size: 2.2em;
     }
+
+    @media screen and (max-width: 360px) {
+        font-size: 1.5em;
+    }
+`;
+
+export const NotFound = styled.h1`
+    color: white;
+    height: 80vh;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
 `;
